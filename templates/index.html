@@ -17,6 +17,7 @@
             border-radius: 10px;
             background-color: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
         #chat-history {
             margin-bottom: 20px;
@@ -26,33 +27,150 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             background-color: #f9f9f9;
+            animation: fadeIn 1s ease-in-out;
         }
+
+        #query-container {
+            display: flex;
+        }
+
         #query-input {
-            width: calc(100% - 100px);
+            flex: 1;
             padding: 10px;
             border: 1px solid #ddd;
-            border-radius: 5px;
+            border-radius: 5px 0 0 5px;
             margin-bottom: 10px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            animation: inputPulse 1.5s infinite;
         }
+
+        #query-input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        #robot-video {
+            padding: 13px 130px;
+            max-width: 30%;
+        }
+
         #submit-button {
-            padding: 10px 20px;
-            background-color: #007bff;
+            padding: 13px 179px;
+            background-color: #897bff;
             color: #fff;
             border: none;
-            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.3s;
+            outline: none;
         }
+
         #submit-button:hover {
             background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        #submit-button:active {
+            transform: translateY(0);
+        }
+
+        .message {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
+            clear: both;
+            position: relative;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .message.user {
+            background-color: #e0f7fa;
+            align-self: flex-end;
+            margin-left: auto;
+            animation: bounceInRight 0.5s ease-out;
+        }
+
+        .message.bot {
+            background-color: #f1f8e9;
+            animation: bounceInLeft 0.5s ease-out;
+        }
+
+        h1 {
+            text-align: center;
+            color: #897bff;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes buttonPulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes inputPulse {
+            0%,
+            100% {
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0);
+            }
+            50% {
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes bounceInRight {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes bounceInLeft {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
         }
     </style>
 </head>
+
 <body>
     <div id="chat-container">
-        <h1 style="text-align: center;">HYBRID CHAT</h1>
-        <div id="chat-history"></div>
-        <input type="text" id="query-input" placeholder="Type your query here...">
+        <h1>HYBRID CHAT</h1>
+        <video id="robot-video" width="100%" loop autoplay muted>
+            <source src="https://cdnl.iconscout.com/lottie/premium/preview-watermark/search-robot-9197223-7525444.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div id="query-container">
+            <input type="text" id="query-input" placeholder="Type your query here...">
+        </div>
+
         <button id="submit-button" onclick="submitQuery()">Submit</button>
     </div>
 
