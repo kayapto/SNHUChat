@@ -6,17 +6,23 @@
     <title>HYBRID CHAT</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #eef2f7;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         #chat-container {
-            width: 400px;
-            margin: 20px auto;
+            width: 90%;
+            max-width: 400px;
+            margin: 20px;
             padding: 20px;
             border: 1px solid #ccc;
             border-radius: 10px;
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
             position: relative;
         }
         #chat-history {
@@ -32,6 +38,7 @@
 
         #query-container {
             display: flex;
+            align-items: center;
         }
 
         #query-input {
@@ -39,7 +46,6 @@
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 5px 0 0 5px;
-            margin-bottom: 10px;
             outline: none;
             transition: border-color 0.3s, box-shadow 0.3s;
             animation: inputPulse 1.5s infinite;
@@ -51,18 +57,25 @@
         }
 
         #robot-video {
-            padding: 13px 130px;
-            max-width: 30%;
+            max-width: 50px;
+            margin: 0 auto;
+            display: block;
         }
 
         #submit-button {
-            padding: 13px 179px;
-            background-color: #897bff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 42px;
+            background-color: #007bff;
             color: #fff;
             border: none;
+            border-radius: 0 5px 5px 0;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.3s;
             outline: none;
+            font-size: 20px;
         }
 
         #submit-button:hover {
@@ -111,16 +124,6 @@
             }
         }
 
-        @keyframes buttonPulse {
-            0%,
-            100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-        }
-
         @keyframes inputPulse {
             0%,
             100% {
@@ -157,30 +160,50 @@
                 transform: translateX(0);
             }
         }
+
+        .loading-indicator {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
     </style>
 </head>
 
 <body>
     <div id="chat-container">
         <h1>HYBRID CHAT</h1>
-        <video id="robot-video" width="100%" loop autoplay muted>
+        <video id="robot-video" loop autoplay muted>
             <source src="https://cdnl.iconscout.com/lottie/premium/preview-watermark/search-robot-9197223-7525444.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
+        <div id="chat-history"></div>
         <div id="query-container">
-            <input type="text" id="query-input" placeholder="Type your query here...">
+            <input type="text" id="query-input" placeholder="Type your query here..." onkeypress="handleKeyPress(event)">
+            <button id="submit-button" onclick="submitQuery()">&#10148;</button>
+            <div class="loading-indicator" id="loading-indicator"></div>
         </div>
-
-        <button id="submit-button" onclick="submitQuery()">Submit</button>
     </div>
 
     <script>
         function submitQuery() {
             var query = document.getElementById("query-input").value.trim();
             if (query !== "") {
-                document.getElementById("chat-history").innerHTML += "<p>User: " + query + "</p>";
+                document.getElementById("chat-history").innerHTML += "<div class='message user'>User: " + query + "</div>";
                 document.getElementById("query-input").value = "";
                 
+                document.getElementById("loading-indicator").style.display = "block";
+
                 fetch("/process_query", {
                     method: "POST",
                     headers: {
@@ -190,21 +213,28 @@
                 })
                 .then(response => response.json())
                 .then(data => {
+                    document.getElementById("loading-indicator").style.display = "none";
                     if (Array.isArray(data.response)) {
-                        var botResponse = "<p>Bot: The list of patients in the database is:</p>";
-                        botResponse += "<ul>";
+                        var botResponse = "<div class='message bot'>Bot: The list of patients in the database is:</div><ul>";
                         data.response.forEach(patient => {
                             botResponse += "<li>" + patient + "</li>";
                         });
                         botResponse += "</ul>";
                         document.getElementById("chat-history").innerHTML += botResponse;
                     } else {
-                        document.getElementById("chat-history").innerHTML += "<p>Bot: " + data.response + "</p>";
+                        document.getElementById("chat-history").innerHTML += "<div class='message bot'>Bot: " + data.response + "</div>";
                     }
                 })
                 .catch(error => {
+                    document.getElementById("loading-indicator").style.display = "none";
                     console.error("Error:", error);
                 });
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                submitQuery();
             }
         }
     </script>
