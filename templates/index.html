@@ -13,475 +13,228 @@
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
 
-    <!-- Page Navbar -->
-    <nav class="custom-navbar" data-spy="affix" data-offset-top="20">
-        <div class="container">
-            <a class="logo" href="#">AI Healthcare Assistant</a>
-            <ul class="nav">
-                <li class="item">
-                    <a class="link" href="#home">Home</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#about">About</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#service">Service</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#chat-container">Chatbot</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#testmonial">Testmonial</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#contact">Contact</a>
-                </li>
-            </ul>
-            <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
-                <div class="hamburger-box">
-                  <div class="hamburger-inner"></div>
-                </div>
-            </a>
-        </div>
-    </nav><!-- End of Page Navbar -->
-
-    <!-- page header -->
-    <header id="home" class="header">
-        <div class="overlay"></div>
-        <div class="header-content container">
-            <h1 class="header-title">
-                AI Healthcare Assistant
-            </h1>
-            <p class="header-subtitle">Your virtual healthcare assistant</p>
-            <a href="#service" class="btn btn-primary btn-rounded">Learn More</a>
-        </div>
-    </header><!-- End of Page Header -->
-	
-    <!-- about section -->
-    <section class="section pt-0" id="about">
-        <!-- container -->
-        <div class="container text-center">
-            <!-- about wrapper -->
-            <div class="about">
-                <div class="about-img-holder">
-                    <img src="assets/imgs/GEO.gif
-										" class="about-img" alt="Landing page">
-                </div>
-                <div class="about-caption">
-                    <p class="section-subtitle">Who Am I ?</p>
-                    <h2 class="section-title mb-3">Your AI Healthcare Assistant</h2>
-                    <p>
-                        I am an innovative healthcare chatbot designed to assist users with a variety of health-related needs. This virtual assistant leverages advanced natural language processing (NLP) and machine learning technologies to provide accurate, personalized, and timely healthcare information and support.
-                    </p>
-                    <button class="btn-rounded btn btn-outline-primary mt-4" onclick="scrollToChatbot()">Let's Talk</button>
-                </div>
-            </div><!-- end of about wrapper -->
-        </div><!-- end of container -->
-    </section> <!-- end of about section -->
-
-    <!-- service section -->
-    <section class="section" id="service">
-        <div class="container text-center">
-            <p class="section-subtitle">What I Do ?</p>
-            <h6 class="section-title mb-6">Service</h6>
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-6 col-lg-3">
-                    <div class="service-card">
-                        <div class="body">
-                            <img src="assets/imgs/pencil-case.svg" alt="Landing page" class="icon">
-                            <h6 class="title">Patients Query</h6>
-                            <p class="subtitle">AI Healthcare Assistant helps you understand symptoms, potential conditions, and offers recommendations on whether to seek professional medical attention.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="service-card">
-                        <div class="body">
-                            <img src="assets/imgs/responsive.svg" alt="Landing page" class="icon">
-                            <h6 class="title">Staff Quey</h6>
-                            <p class="subtitle">Provides healthcare staff with easy access to patient information, appointment schedules, and administrative support.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="service-card">
-                        <div class="body">
-                            <img src="assets/imgs/toolbox.svg" alt="Landing page" class="icon">
-                            <h6 class="title">Schedule an Appointment</h6>
-                            <p class="subtitle">Easily book, reschedule, or cancel appointments with healthcare providers through your Healthcare Assistant.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="service-card">
-                        <div class="body">
-                            <img src="assets/imgs/analytics.svg" alt="Landing page" class="icon">
-                            <h6 class="title">Solve Your Problem</h6>
-                            <p class="subtitle">Your Healthcare Assistant provides practical solutions and advice for managing health conditions, medication schedules, and lifestyle changes.</p>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- end of row -->
-        </div>
-    </section><!-- end of service section -->
-
-		<section>
-
-			<!-- Modal -->
-		<div id="myModal" class="modal">
-					<div class="modal-content">
-							<h2>Login</h2>
-							<form id="loginForm">
-									<label for="username">Username:</label>
-									<input type="text" id="username" name="username" required><br><br>
-									<label for="password">Password:</label>
-									<input type="password" id="password" name="password" required><br><br>
-									<button type="submit">Login</button>
-							</form>
-					</div>
-		</div>
-
-		<div id="chat-container">
-		<h2>Talk to Your Healthcare Assistant</h2>
-		<div id="chat-history">
-				<!-- Sample chat history -->
-				<div class="message user">Hi AI Healthcare Assistant!</div>
-				<div class="message bot">Hello! How can I assist you today?</div>
-				<div class="message user">Can you help me schedule an appointment?</div>
-				<div class="message bot">Sure! Please provide me with the preferred date and time for your appointment.</div>
-		</div>
-		<div id="query-container">
-				<input type="text" id="query-input" placeholder="Type your query here..." onkeydown="handleEnterKey(event)">
-				<button id="submit-button" onclick="submitQuery()">
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="50" viewBox="0 0 24 24">
-		                     <path d="M2 21l21-9-21-9v7l15 2-15 2z"></path>
-		                 </svg>
-				</button>
-		</div>
-</div>
-	</section>
-    <!-- testimonial section -->
-    <section class="section" id="testmonial">
-        <div class="container text-center">
-            <p class="section-subtitle">What Think Client About Me ?</p>
-            <h6 class="section-title mb-6">Testmonial</h6>
-
-            <!-- row -->
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="testimonial-card">
-                        <div class="testimonial-card-img-holder">
-                            <img src="assets/imgs/avatar2.jpg" class="testimonial-card-img" alt="Landing page">
-                        </div>
-                        <div class="testimonial-card-body">
-                            <p class="testimonial-card-subtitle">Your Healthcare Assistant has been a lifesaver! The symptom checker is so accurate and the medication reminders have helped me stay on track with my treatment.</p>
-                            <h6 class="testimonial-card-title">Emily Reb</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="testimonial-card">
-                        <div class="testimonial-card-img-holder">
-                            <img src="assets/imgs/avatar3.jpg" class="testimonial-card-img" alt="Landing page">
-                        </div>
-                        <div class="testimonial-card-body">
-                            <p class="testimonial-card-subtitle">As a busy mom, Healthcare Assistant makes it easy to schedule doctor appointments for my family. The integration with our local clinic's system is seamless and efficient.</p>
-                            <h6 class="testimonial-card-title">Emily Reb</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> <!-- end of container -->
-    </section> <!-- end of testimonial section -->
-
-    <!-- contact section -->
-    <section class="section" id="contact">
-        <div class="container text-center">
-            <p class="section-subtitle">How can you communicate?</p>
-            <h6 class="section-title mb-5">Contact Us</h6>
-            <!-- contact form -->
-            <form action="" class="contact-form col-md-10 col-lg-8 m-auto">
-                <div class="form-row">
-                    <div class="form-group col-sm-6">
-                        <input type="text" size="50" class="form-control" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <input type="email" class="form-control" placeholder="Enter Email"requried>
-                    </div>
-                    <div class="form-group col-sm-12">
-                        <textarea name="comment" id="comment" rows="6"   class="form-control" placeholder="Write Something"></textarea>
-                    </div>
-                    <div class="form-group col-sm-12 mt-3">
-                        <input type="submit" value="Send Message" class="btn btn-outline-primary rounded">
-                    </div>
-                </div>
-            </form><!-- end of contact form -->
-        </div><!-- end of container -->
-    </section><!-- end of contact section -->
-
-    <!-- footer -->
+<!-- Page Navbar -->
+<nav class="custom-navbar" data-spy="affix" data-offset-top="20">
     <div class="container">
-        <footer class="footer">
-            <p class="mb-0">Copyright <script>document.write(new Date().getFullYear())</script> &copy; <a href="http://www.devcrud.com">HealthcareChatbot</a></p>
-            <div class="social-links text-right m-auto ml-sm-auto">
-                <a href="javascript:void(0)" class="link"><i class="ti-facebook"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-twitter-alt"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-google"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-pinterest-alt"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-instagram"></i></a>
-                <a href="javascript:void(0)" class="link"><i class="ti-rss"></i></a>
+        <a class="logo" href="#">AI Healthcare Assistant</a>
+        <ul class="nav">
+            <li class="item">
+                <a class="link" href="#home">Home</a>
+            </li>
+            <li class="item">
+                <a class="link" href="#about">About</a>
+            </li>
+            <li class="item">
+                <a class="link" href="#service">Service</a>
+            </li>
+            <li class="item">
+                <a class="link" href="#chat-container">Chatbot</a>
+            </li>
+            <li class="item">
+                <a class="link" href="#testimonial">Testimonial</a>
+            </li>
+            <li class="item">
+                <a class="link" href="#contact">Contact</a>
+            </li>
+        </ul>
+        <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
+            <div class="hamburger-box">
+                <div class="hamburger-inner"></div>
             </div>
-        </footer>
-    </div> <!-- end of page footer -->
+        </a>
+    </div>
+</nav><!-- End of Page Navbar -->
 
-	<!-- core  -->
-    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
-    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+<!-- Page Header -->
+<header id="home" class="header">
+    <div class="overlay"></div>
+    <div class="header-content container">
+        <h1 class="header-title">AI Healthcare Assistant</h1>
+        <p class="header-subtitle">Your virtual healthcare assistant</p>
+        <a href="#service" class="btn btn-primary btn-rounded">Learn More</a>
+    </div>
+</header><!-- End of Page Header -->
 
-    <!-- bootstrap 3 affix -->
-	<script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
-
-    <script src="assets/js/navigation.js"></script>
-
-=======
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HYBRID CHAT</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #eef2f7;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        #chat-container {
-            width: 90%;
-            max-width: 400px;
-            margin: 20px;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: #fff;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-        #chat-history {
-            margin-bottom: 20px;
-            overflow-y: auto;
-            max-height: 300px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        #query-container {
-            display: flex;
-            align-items: center;
-        }
-
-        #query-input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px 0 0 5px;
-            outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            animation: inputPulse 1.5s infinite;
-        }
-
-        #query-input:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        }
-
-        #robot-video {
-            max-width: 50px;
-            margin: 0 auto;
-            display: block;
-        }
-
-        #submit-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 42px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
-            outline: none;
-            font-size: 20px;
-        }
-
-        #submit-button:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
-        }
-
-        #submit-button:active {
-            transform: translateY(0);
-        }
-
-        .message {
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 10px;
-            max-width: 80%;
-            clear: both;
-            position: relative;
-            animation: slideIn 0.5s ease-out;
-        }
-
-        .message.user {
-            background-color: #e0f7fa;
-            align-self: flex-end;
-            margin-left: auto;
-            animation: bounceInRight 0.5s ease-out;
-        }
-
-        .message.bot {
-            background-color: #f1f8e9;
-            animation: bounceInLeft 0.5s ease-out;
-        }
-
-        h1 {
-            text-align: center;
-            color: #897bff;
-            animation: fadeIn 2s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes inputPulse {
-            0%,
-            100% {
-                box-shadow: 0 0 5px rgba(0, 123, 255, 0);
-            }
-            50% {
-                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(-100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes bounceInRight {
-            from {
-                transform: translateX(100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes bounceInLeft {
-            from {
-                transform: translateX(-100%);
-            }
-            to {
-                transform: translateX(0);
-            }
-        }
-
-        .loading-indicator {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            margin-left: 10px;
-            display: none;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-    </style>
-</head>
-
-<body>
-    <div id="chat-container">
-        <h1>HYBRID CHAT</h1>
-        <video id="robot-video" loop autoplay muted>
-            <source src="https://cdnl.iconscout.com/lottie/premium/preview-watermark/search-robot-9197223-7525444.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div id="chat-history"></div>
-        <div id="query-container">
-            <input type="text" id="query-input" placeholder="Type your query here..." onkeypress="handleKeyPress(event)">
-            <button id="submit-button" onclick="submitQuery()">&#10148;</button>
-            <div class="loading-indicator" id="loading-indicator"></div>
+<!-- About Section -->
+<section class="section pt-0" id="about">
+    <div class="container text-center">
+        <div class="about">
+            <div class="about-img-holder">
+                <img src="assets/imgs/GEO.gif" class="about-img" alt="Landing page">
+            </div>
+            <div class="about-caption">
+                <p class="section-subtitle">Who Am I?</p>
+                <h2 class="section-title mb-3">Your AI Healthcare Assistant</h2>
+                <p>
+                    I am an innovative healthcare chatbot designed to assist users with a variety of health-related needs. This virtual assistant leverages advanced natural language processing (NLP) and machine learning technologies to provide accurate, personalized, and timely healthcare information and support.
+                </p>
+                <button class="btn-rounded btn btn-outline-primary mt-4" onclick="scrollToChatbot()">Let's Talk</button>
+            </div>
         </div>
     </div>
+</section> <!-- End of About Section -->
 
-    <script>
-        function submitQuery() {
-            var query = document.getElementById("query-input").value.trim();
-            if (query !== "") {
-                document.getElementById("chat-history").innerHTML += "<div class='message user'>User: " + query + "</div>";
-                document.getElementById("query-input").value = "";
-                
-                document.getElementById("loading-indicator").style.display = "block";
+<!-- Service Section -->
+<section class="section" id="service">
+    <div class="container text-center">
+        <p class="section-subtitle">What I Do?</p>
+        <h6 class="section-title mb-6">Service</h6>
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card">
+                    <div class="body">
+                        <img src="assets/imgs/pencil-case.svg" alt="Landing page" class="icon">
+                        <h6 class="title">Patients Query</h6>
+                        <p class="subtitle">AI Healthcare Assistant helps you understand symptoms, potential conditions, and offers recommendations on whether to seek professional medical attention.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card">
+                    <div class="body">
+                        <img src="assets/imgs/responsive.svg" alt="Landing page" class="icon">
+                        <h6 class="title">Staff Query</h6>
+                        <p class="subtitle">Provides healthcare staff with easy access to patient information, appointment schedules, and administrative support.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card">
+                    <div class="body">
+                        <img src="assets/imgs/toolbox.svg" alt="Landing page" class="icon">
+                        <h6 class="title">Schedule an Appointment</h6>
+                        <p class="subtitle">Easily book, reschedule, or cancel appointments with healthcare providers through your Healthcare Assistant.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="service-card">
+                    <div class="body">
+                        <img src="assets/imgs/analytics.svg" alt="Landing page" class="icon">
+                        <h6 class="title">Solve Your Problem</h6>
+                        <p class="subtitle">Your Healthcare Assistant provides practical solutions and advice for managing health conditions, medication schedules, and lifestyle changes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End of Service Section -->
 
-                fetch("/process_query", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: "query=" + encodeURIComponent(query)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById("loading-indicator").style.display = "none";
-                    if (Array.isArray(data.response)) {
-                        var botResponse = "<div class='message bot'>Bot: The list of patients in the database is:</div><ul>";
-                        data.response.forEach(patient => {
-                            botResponse += "<li>" + patient + "</li>";
-                        });
-                        botResponse += "</ul>";
-                        document.getElementById("chat-history").innerHTML += botResponse;
-                    } else {
-                        document.getElementById("chat-history").innerHTML += "<div class='message bot'>Bot: " + data.response + "</div>";
-                    }
-                })
-                .catch(error => {
-                    document.getElementById("loading-indicator").style.display = "none";
-                    console.error("Error:", error);
-                });
-            }
+<!-- Chat Section -->
+<section id="chat-container">
+    <h2>Talk to Your Healthcare Assistant</h2>
+    <div id="chat-history">
+        <!-- Sample chat history -->
+        <div class="message user">Hi AI Healthcare Assistant!</div>
+        <div class="message bot">Hello! How can I assist you today?</div>
+        <div class="message user">Can you help me schedule an appointment?</div>
+        <div class="message bot">Sure! Please provide me with the preferred date and time for your appointment.</div>
+    </div>
+    <div id="query-container">
+        <input type="text" id="query-input" placeholder="Type your query here..." onkeydown="handleEnterKey(event)">
+        <button id="submit-button" onclick="submitQuery()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path d="M2 21l21-9-21-9v7l15 2-15 2z"></path>
+            </svg>
+        </button>
+    </div>
+</section>
+
+<!-- Testimonial Section -->
+<section class="section" id="testimonial">
+    <div class="container text-center">
+        <p class="section-subtitle">What Clients Think About Me?</p>
+        <h6 class="section-title mb-6">Testimonial</h6>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-card-img-holder">
+                        <img src="assets/imgs/avatar2.jpg" class="testimonial-card-img" alt="Landing page">
+                    </div>
+                    <div class="testimonial-card-body">
+                        <p class="testimonial-card-subtitle">Your Healthcare Assistant has been a lifesaver! The symptom checker is so accurate and the medication reminders have helped me stay on track with my treatment.</p>
+                        <h6 class="testimonial-card-title">Emily Reb</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="testimonial-card">
+                    <div class="testimonial-card-img-holder">
+                        <img src="assets/imgs/avatar3.jpg" class="testimonial-card-img" alt="Landing page">
+                    </div>
+                    <div class="testimonial-card-body">
+                        <p class="testimonial-card-subtitle">As a busy mom, Healthcare Assistant makes it easy to schedule doctor appointments for my family. The integration with our local clinic's system is seamless and efficient.</p>
+                        <h6 class="testimonial-card-title">Emily Reb</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section><!-- End of Testimonial Section -->
+
+<!-- Contact Section -->
+<section class="section" id="contact">
+    <div class="container text-center">
+        <p class="section-subtitle">Get In Touch With Me</p>
+        <h6 class="section-title mb-6">Contact</h6>
+        <form>
+            <input type="text" class="form-control" placeholder="Name">
+            <input type="email" class="form-control" placeholder="Email">
+            <textarea name="message" class="form-control" placeholder="Message" rows="4"></textarea>
+            <input type="submit" class="form-control submit" value="SEND MESSAGE">
+        </form>
+    </div>
+</section><!-- End of Contact Section -->
+
+<!-- Page Footer -->
+<div class="container">
+    <footer class="footer">
+        <p class="mb-0">Copyright
+            <script>document.write(new Date().getFullYear())</script> &copy; <a href="https://www.devcrud.com" target="_blank">DevCRUD</a>. All rights reserved.
+        </p>
+    </footer>
+</div><!-- End of Page Footer -->
+
+<!-- core  -->
+<script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+<script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+<!-- bootstrap 3 affix -->
+<script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+<!-- Creative Design js -->
+<script src="assets/js/page.js"></script>
+
+<script>
+    function scrollToChatbot() {
+        var chatbotElement = document.getElementById('chat-container');
+        chatbotElement.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function submitQuery() {
+        var queryInput = document.getElementById('query-input');
+        var userQuery = queryInput.value;
+        if (userQuery.trim() !== '') {
+            var chatHistory = document.getElementById('chat-history');
+            var userMessage = document.createElement('div');
+            userMessage.className = 'message user';
+            userMessage.innerText = userQuery;
+            chatHistory.appendChild(userMessage);
+
+            // Simulate bot response for demonstration
+            var botMessage = document.createElement('div');
+            botMessage.className = 'message bot';
+            botMessage.innerText = 'Processing your query...';
+            chatHistory.appendChild(botMessage);
+
+            queryInput.value = '';
+            chatHistory.scrollTop = chatHistory.scrollHeight;
         }
+    }
 
-        function handleKeyPress(event) {
-            if (event.key === "Enter") {
-                submitQuery();
-            }
+    function handleEnterKey(event) {
+        if (event.key === 'Enter') {
+            submitQuery();
         }
-    </script>
->>>>>>> cf170447dc48d309767df44a1244a01634c05cc6
+    }
+</script>
 </body>
 </html>
