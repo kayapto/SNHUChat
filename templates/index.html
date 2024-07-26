@@ -145,44 +145,86 @@
         </div>
     </section><!-- End of Service Section -->
 
-    <!-- Chat Section -->
     <section id="chat-container">
         <h2>Talk to Your Healthcare Assistant</h2>
         <div id="chat-history">
-            <!-- Sample chat history -->
-            <div class="message user">Hi AI Healthcare Assistant!</div>
-            <div class="message bot">Hello! How can I assist you today?</div>
-            <div class="message user">Can you help me schedule an appointment?</div>
-            <div class="message bot">Sure! Please provide me with the preferred date and time for your appointment.</div>
+            <!-- Initial sample chat history will be populated dynamically -->
         </div>
         <div id="query-container">
-            <input type="text" id="query-input" placeholder="Type your query here..." onkeydown="handleEnterKey(event)">
-            <button id="submit-button" onclick="submitQuery()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path d="M2 21l21-9-21-9v7l15 2-15 2z"></path>
-                </svg>
-            </button>
+            <input type="text" id="user-input" placeholder="Type your message here...">
+            <button id="send-button">Send</button>
+            <div class="loading-indicator" id="loading-indicator"></div>
         </div>
-    </section>
+    </section><!-- End of Chat Section -->
+    
+    <!-- Update the following script to integrate the chatbot functionality -->
+    <script>
+        document.getElementById('send-button').addEventListener('click', submitQuery);
+        document.getElementById('user-input').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                submitQuery();
+            }
+        });
+    
+        function submitQuery() {
+            var query = document.getElementById("user-input").value.trim();
+            if (query !== "") {
+                var chatHistory = document.getElementById("chat-history");
+                chatHistory.innerHTML += "<div class='message user'>User: " + query + "</div>";
+                document.getElementById("user-input").value = "";
+                
+                var loadingIndicator = document.getElementById("loading-indicator");
+                loadingIndicator.style.display = "block";
+    
+                fetch("/process_query", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: "query=" + encodeURIComponent(query)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    loadingIndicator.style.display = "none";
+                    var botResponse = "";
+                    if (Array.isArray(data.response)) {
+                        botResponse = "<div class='message bot'>Bot: The list of patients in the database is:</div><ul>";
+                        data.response.forEach(patient => {
+                            botResponse += "<li>" + patient + "</li>";
+                        });
+                        botResponse += "</ul>";
+                    } else {
+                        botResponse = "<div class='message bot'>Bot: " + data.response + "</div>";
+                    }
+                    chatHistory.innerHTML += botResponse;
+                    chatHistory.scrollTop = chatHistory.scrollHeight; // Scroll to the bottom
+                })
+                .catch(error => {
+                    loadingIndicator.style.display = "none";
+                    console.error("Error:", error);
+                });
+            }
+        }
+    </script>
 
     <!-- Testimonial Section -->
     <section class="section" id="testimonial">
         <div class="container text-center">
-            <p class="section-subtitle">What Clients Think About Me?</p>
-            <h6 class="section-title mb-6">Testimonial</h6>
+            <p class="section-subtitle">What My Clients Say</p>
+            <h6 class="section-title mb-6">Testimonials</h6>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-6 col-lg-5">
                     <div class="testimonial-card">
                         <div class="testimonial-card-img-holder">
                             <img src="assets/imgs/avatar2.jpg" class="testimonial-card-img" alt="Testimonial Image 1">
                         </div>
                         <div class="testimonial-card-body">
-                            <p class="testimonial-card-subtitle">Your Healthcare Assistant has been a lifesaver! The symptom checker is so accurate and the medication reminders have helped me stay on track with my treatment.</p>
-                            <h6 class="testimonial-card-title">Emily Reb</h6>
+                            <p class="testimonial-card-subtitle">AI Healthcare Assistant has revolutionized the way I manage my healthcare. The chatbot is incredibly user-friendly and always provides accurate information.</p>
+                            <h6 class="testimonial-card-title">John Doe</h6>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-lg-5">
                     <div class="testimonial-card">
                         <div class="testimonial-card-img-holder">
                             <img src="assets/imgs/avatar3.jpg" class="testimonial-card-img" alt="Testimonial Image 2">
@@ -233,9 +275,8 @@
     <div id="toast" class="toast"></div>
 
     <!-- Core Scripts -->
-    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
-    <!-- Remove the line below if you no longer need page.js -->
-    <!-- <script src="assets/js/page.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="assets/js/page.js"></script>
     <script src="assets/js/navigation.js"></script>
 </body>
 </html>
