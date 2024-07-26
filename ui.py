@@ -3,7 +3,7 @@ import subprocess
 import spacy
 import sqlite3
 import requests
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 from xvfbwrapper import Xvfb
 from langchain.agents import create_sql_agent
 from langchain_community.agent_toolkits import SQLDatabaseToolkit
@@ -24,7 +24,7 @@ warnings.simplefilter("ignore", LangChainDeprecationWarning)
 
 nlp = spacy.load("en_core_web_sm")
 
-os.environ['OPENAI_API_KEY'] = "API secret Key "
+os.environ['OPENAI_API_KEY'] = "API secret KEY"
 
 conn = sqlite3.connect('cpt_codes_sql.db')
 db = SQLDatabase.from_uri("sqlite:///cpt_codes_sql.db")
@@ -61,6 +61,14 @@ weaviate_client = WeaviateClient(connection_params)
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/assets/<path:filename>')
+def serve_static_files(filename):
+    # Define the root directory for assets
+    root_dir = os.path.join(os.getcwd(), 'assets')
+    
+    # Send the requested file from the assets directory
+    return send_from_directory(root_dir, filename)
 
 @app.route('/process_query', methods=['POST'])
 def process_query():
