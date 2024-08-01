@@ -1,111 +1,83 @@
-// Smooth scrolling for internal links
-document.addEventListener('DOMContentLoaded', () => {
-    const links = document.querySelectorAll('a[href^="#"]');
-
-    links.forEach(link => {
-        link.addEventListener('click', e => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href').substring(1);
-            const targetElement = document.getElementById(targetId);
-
-            if (targetElement) {
-                window.scrollTo({
-                    top: targetElement.offsetTop - 40, // Adjust offset as needed
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-});
-
-// Hamburger menu toggle
-document.addEventListener('DOMContentLoaded', () => {
-    const navToggle = document.getElementById('nav-toggle');
-    const nav = document.querySelector('.custom-navbar .nav');
-
-    if (navToggle && nav) {
-        navToggle.addEventListener('click', () => {
-            nav.classList.toggle('open');
-            navToggle.classList.toggle('is-active');
-        });
-    }
-});
-
-// Form submission handling
-document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('loginForm');
-
-    if (loginForm) {
-        loginForm.addEventListener('submit', e => {
-            e.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            // Add your form submission logic here
-            console.log('Username:', username);
-            console.log('Password:', password);
-
-            // For demonstration, show an alert
-            alert('Form submitted');
-        });
-    }
-});
-
-// Chatbot query handling
-document.addEventListener('DOMContentLoaded', () => {
-    const queryInput = document.getElementById('query-input');
-    
-    if (queryInput) {
-        queryInput.addEventListener('keypress', event => {
-            if (event.key === 'Enter') {
-                submitQuery();
-            }
-        });
-    }
-});
-function submitQuery() {
-    console.log("submitQuery function triggered"); // Debugging line
-    var query = document.getElementById("query-input").value.trim();
-    if (query !== "") {
-        var chatHistory = document.getElementById("chat-history");
-        chatHistory.innerHTML += "<div class='message user'>User: " + query + "</div>";
-        document.getElementById("query-input").value = "";
-        
-        var loadingIndicator = document.getElementById("loading-indicator");
-        loadingIndicator.style.display = "block";
-
-        fetch("/process_query", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: "query=" + encodeURIComponent(query)
-        })
-        .then(response => response.json())
-        .then(data => {
-            loadingIndicator.style.display = "none";
-            var botResponse = "";
-            if (Array.isArray(data.response)) {
-                botResponse = "<div class='message bot'>Bot: The list of patients in the database is:</div><ul>";
-                data.response.forEach(patient => {
-                    botResponse += "<li>" + patient + "</li>";
-                });
-                botResponse += "</ul>";
-            } else {
-                botResponse = "<div class='message bot'>Bot: " + data.response + "</div>";
-            }
-            chatHistory.innerHTML += botResponse;
-            chatHistory.scrollTop = chatHistory.scrollHeight; // Scroll to the bottom
-        })
-        .catch(error => {
-            loadingIndicator.style.display = "none";
-            console.error("Error:", error);
-        });
-    }
+function scrollToChatbot() {
+    var chatbotSection = document.getElementById('chat-container');
+    chatbotSection.scrollIntoView({ behavior: 'smooth' });
 }
+   // Get the modal
+   var modal = document.getElementById("myModal");
 
-function handleKeyPress(event) {
-    if (event.key === "Enter") {
-        submitQuery();
-    }
-}
+   // When the page loads or refreshes, display the modal
+   window.onload = function() {
+       modal.style.display = "block";
+   }
+
+   // Validate login credentials
+   document.getElementById("loginForm").addEventListener("submit", function(event) {
+       event.preventDefault();
+       var username = document.getElementById("username").value.trim();
+       var password = document.getElementById("password").value.trim();
+
+       // Check if username and password are correct (admin/admin in this case)
+       if (username === "admin" && password === "admin") {
+           modal.style.display = "none"; // Hide the modal
+           showToast("Success", "Login successful", "success");
+       } else {
+           alert("Invalid username or password. Please try again.")
+       }
+   });
+
+   // Function to handle query submission
+   function submitQuery() {
+       var query = document.getElementById("query-input").value.trim();
+       if (query !== "") {
+           document.getElementById("chat-history").innerHTML += `
+               <div class="message user">
+                   <p>${query}</p>
+               </div>
+           `;
+
+           document.getElementById("query-input").value = "";
+
+           fetch("/process_query", {
+                   method: "POST",
+                   headers: {
+                       "Content-Type": "application/x-www-form-urlencoded",
+                   },
+                   body: "query=" + encodeURIComponent(query)
+               })
+               .then(response => response.json())
+               .then(data => {
+                   if (Array.isArray(data.response)) {
+                       var botResponse = `<div class="message bot">Bot: The list of patients in the database is:</div>`;
+                       botResponse += "<ul>";
+                       data.response.forEach(patient => {
+                           botResponse += "<li>" + patient + "</li>";
+                       });
+                       botResponse += "</ul>";
+                       document.getElementById("chat-history").innerHTML += botResponse;
+                   } else {
+                       document.getElementById("chat-history").innerHTML += ` <div class="message bot"> ` + data.response + "</div>";
+                   }
+               })
+               .catch(error => {
+                   console.error("Error:", error);
+               });
+       }
+   }
+
+   // Function to handle Enter key press
+   function handleEnterKey(event) {
+       if (event.keyCode === 13) {
+           event.preventDefault();
+           submitQuery();
+       }
+   }
+
+   // Function to display toast
+   function showToast(title, message, type) {
+       var toast = document.getElementById("toast");
+       toast.textContent = title + ": " + message;
+       toast.className = "toast show " + type;
+       setTimeout(function() {
+           toast.className = toast.className.replace("show", "");
+       }, 3000);
+   }
