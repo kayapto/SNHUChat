@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Healthcare Assistant</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="assets/css/page.css">
-    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../assets/css/page.css">
+    <link rel="stylesheet" href="../assets/vendors/themify-icons/css/themify-icons.css">
     <style>
         /* Modal styles */
         .modal {
@@ -64,7 +64,7 @@
             </ul>
             <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
                 <div class="hamburger-box">
-                    <div class="hamburger-inner"></div>
+                  <div class="hamburger-inner"></div>
                 </div>
             </a>
         </div>
@@ -108,7 +108,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="service-card">
                         <div class="body">
-                            <img src="assets/imgs/pencil-case.svg" alt="Patients Query Icon" class="icon">
+                            <img src="../assets/imgs/pencil-case.svg" alt="Patients Query Icon" class="icon">
                             <h6 class="title">Patients Query</h6>
                             <p class="subtitle">AI Healthcare Assistant helps you understand symptoms and potential conditions</p>
                         </div>
@@ -117,7 +117,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="service-card">
                         <div class="body">
-                            <img src="assets/imgs/responsive.svg" alt="Staff Query Icon" class="icon">
+                            <img src="../assets/imgs/responsive.svg" alt="Staff Query Icon" class="icon">
                             <h6 class="title">Staff Query</h6>
                             <p class="subtitle">Provides healthcare staff with easy access to patient information and appointment schedules.</p>
                         </div>
@@ -126,7 +126,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="service-card">
                         <div class="body">
-                            <img src="assets/imgs/toolbox.svg" alt="Schedule an Appointment Icon" class="icon">
+                            <img src="../assets/imgs/toolbox.svg" alt="Schedule an Appointment Icon" class="icon">
                             <h6 class="title">Schedule an Appointment</h6>
                             <p class="subtitle">Easily book, reschedule, or cancel appointments with healthcare providers.</p>
                         </div>
@@ -135,7 +135,7 @@
                 <div class="col-md-6 col-lg-3">
                     <div class="service-card">
                         <div class="body">
-                            <img src="assets/imgs/analytics.svg" alt="Solve Your Problem Icon" class="icon">
+                            <img src="../assets/imgs/analytics.svg" alt="Solve Your Problem Icon" class="icon">
                             <h6 class="title">Solve Your Problem</h6>
                             <p class="subtitle">Your Healthcare Assistant provides practical solutions and advice.</p>
                         </div>
@@ -146,15 +146,15 @@
     </section><!-- End of Service Section -->
 
     <section id="chat-container">
-        <h2>Talk to Your Healthcare Assistant</h2>
-        <div id="chat-history">
+		<h2>Talk to Your Healthcare Assistant</h2>
+		<div id="chat-history">
             <!-- Initial sample chat history will be populated dynamically -->
-        </div>
-        <div id="query-container">
+		</div>
+		<div id="query-container">
             <input type="text" id="user-input" placeholder="Type your message here...">
             <button id="send-button">Send</button>
             <div class="loading-indicator" id="loading-indicator"></div>
-        </div>
+</div>
     </section><!-- End of Chat Section -->
     
     <!-- Update the following script to integrate the chatbot functionality -->
@@ -243,15 +243,26 @@
     <section class="section" id="contact">
         <div class="container text-center">
             <p class="section-subtitle">Get In Touch With Me</p>
-            <h6 class="section-title mb-6">Contact</h6>
-            <form action="">
-                <input type="text" class="form-control" placeholder="Your Name" required>
-                <input type="email" class="form-control" placeholder="Your Email" required>
-                <textarea class="form-control" placeholder="Message" rows="6" required></textarea>
-                <button type="submit" class="form-control submit-button">Send Message</button>
-            </form>
-        </div>
-    </section><!-- End of Contact Section -->
+            <h6 class="section-title mb-5">Contact Us</h6>
+            <!-- contact form -->
+            <form action="" class="contact-form col-md-10 col-lg-8 m-auto">
+                <div class="form-row">
+                    <div class="form-group col-sm-6">
+                        <input type="text" size="50" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <input type="email" class="form-control" placeholder="Enter Email"requried>
+                    </div>
+                    <div class="form-group col-sm-12">
+                        <textarea name="comment" id="comment" rows="6"   class="form-control" placeholder="Write Something"></textarea>
+                    </div>
+                    <div class="form-group col-sm-12 mt-3">
+                        <input type="submit" value="Send Message" class="btn btn-outline-primary rounded">
+                    </div>
+                </div>
+            </form><!-- end of contact form -->
+        </div><!-- end of container -->
+    </section><!-- end of contact section -->
 
     <!-- Page Footer -->
     <div class="container">
@@ -276,7 +287,7 @@
 
     <!-- Core Scripts -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="assets/js/page.js"></script>
-    <script src="assets/js/navigation.js"></script>
+    <script src="../assets/js/page.js"></script>
+    <script src="../assets/js/navigation.js"></script>
 </body>
 </html>
