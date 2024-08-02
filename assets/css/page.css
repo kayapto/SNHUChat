@@ -126,7 +126,7 @@ body {
   align-items: center;
 }
 
-#query-input {
+#user-input {
   flex: 1;
   padding: 10px;
   border: 1px solid #ddd;
@@ -135,12 +135,12 @@ body {
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-#query-input:focus {
+#user-input:focus {
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
-
-#submit-button {
+/*
+#send-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -156,13 +156,27 @@ body {
   font-size: 20px;
 }
 
-#submit-button:hover {
+#send-button:hover {
   background-color: #0056b3;
   transform: translateY(-2px);
 }
 
-#submit-button:active {
+#send-button:active {
   transform: translateY(0);
+}
+*/
+
+/* Default navbar style */
+.custom-navbar {
+  background-color: transparent; /* Default background */
+  transition: background-color 0.3s, backdrop-filter 0.3s; /* Smooth transition */
+}
+
+/* Navbar style when scrolled */
+.custom-navbar.scrolled {
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+  backdrop-filter: blur(8px); /* Blur effect */
+  -webkit-backdrop-filter: blur(8px); /* Safari support */
 }
 
 h2 {
@@ -250,8 +264,8 @@ form {
     text-align: center;
 }
 
-form input[type=text],
-form input[type=password] {
+.username,
+.password {
     padding: 10px;
     margin: 5px;
     width: 200px;
