@@ -52,21 +52,22 @@
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
 
     <!-- Page Navbar -->
-    <nav class="custom-navbar" data-spy="affix" data-offset-top="20">
+    <nav class="custom-navbar" data-spy="affix" data-offset-top="30">
         <div class="container">
             <a class="logo" href="#">AI Healthcare Assistant</a>
             <ul class="nav">
                 <li class="item"><a class="link" href="#home">Home</a></li>
                 <li class="item"><a class="link" href="#about">About</a></li>
                 <li class="item"><a class="link" href="#service">Service</a></li>
-                <li class="item"><a class="link" href="#chat-container">Chatbot</a></li>
-                <li class="item"><a class="link" href="#testimonial">Testimonial</a></li>
+                <li class="item" id="admin-part-chat"><a class="link" href="#chat-container">Chatbot</a></li>
+                <li class="item"  id="admin-part-testimonial"><a class="link" href="#testimonial">Testimonial</a></li>
                 <li class="item"><a class="link" href="#contact">Contact</a></li>
                 <li class="item"><a class="link" href="#appointment">Make Appointment</a></li>
+                <li class="item" id="admin-part-appointment"><a class="link" href="#appointments">Appointment List</a></li>
             </ul>
             <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
                 <div class="hamburger-box">
-                  <div class="hamburger-inner"></div>
+                    <div class="hamburger-inner"></div>
                 </div>
             </a>
         </div>
@@ -209,16 +210,13 @@
             </div>
         </form><!-- end of appointment form -->
     </div><!-- end of container -->
-    <section class="section" id="make-appointment">
-</section>
+    <section class="section" id="appointments"></section>
 </section><!-- end of appointment section -->
-
-
 
     <!-- Testimonial Section -->
     <section class="section" id="testimonial">
         <div class="container text-center">
-            <p class="section-subtitle">What My Clients Say</p>
+            <p class="section-subtitle">What Our Clients Say</p>
             <h6 class="section-title mb-6">Testimonials</h6>
             <div class="row">
                 <div class="col-md-5 col-lg-4">
@@ -282,7 +280,6 @@
             </form><!-- end of contact form -->
         </div><!-- end of container -->
     </section><!-- end of contact section -->
-
 
     <!-- Page Footer -->
     <div class="container">

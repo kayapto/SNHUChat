@@ -15,14 +15,18 @@ function scrollToChatbot() {
        event.preventDefault();
        var username = document.getElementById("username").value.trim();
        var password = document.getElementById("password").value.trim();
-
+       
        // Check if username and password are correct (admin/admin in this case)
        if (username === "admin" || username === "nurse" || username === "doctor") {
-           modal.style.display = "none";
+           modal.style.display = "none";  
+           document.querySelector('#admin-part-testimonial').style.display = 'none';         
            createAppointmentsSection();
            listAppointments();
            showToast("Success", "Login successful", "success");
        } else{
+       document.querySelector('#admin-part-chat').style.display = 'none';  
+       document.querySelector('#chat-container').style.display = 'none';  
+       document.querySelector('#admin-part-appointment').style.display = 'none';  
         modal.style.display = "none";
         showToast("Success", "Login successful", "success");
     }
@@ -300,7 +304,7 @@ function listAppointments() {
 }
 
 function createAppointmentsSection() {
-    const makeAppointmentSection = document.querySelector('#make-appointment'); // Select the "Make an Appointment" section by its ID or class
+    const makeAppointmentSection = document.querySelector('#appointments'); // Select the "Make an Appointment" section by its ID or class
     const section = document.createElement('section');
     section.className = 'section';
     section.id = 'appointments';
