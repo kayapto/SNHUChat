@@ -193,6 +193,25 @@
                     </div>
                 </div>
                 <div class="form-group col-md-6">
+                    <select id="genderSelect" class="form-control" required>
+                        <option value="" disabled selected>Select a gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                        <option value="Not prefer to say">Not prefer to say</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a gender.
+                    </div>
+                </div>
+                
+                <div class="form-group col-md-6">
+                    <input type="number" id="age" class="form-control" placeholder="Your Age" required>
+                    <div class="invalid-feedback">
+                        Please provide your age.
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
                     <input type="email" id="emailAddress" class="form-control" placeholder="Your Email" required>
                     <div class="invalid-feedback">
                         Please provide your email address.

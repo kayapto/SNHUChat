@@ -127,6 +127,8 @@ document.getElementById('appointmentForm').addEventListener('submit', function(e
 
     const doctorSelect = document.getElementById('doctorSelect');
     const patientName = document.getElementById('patientName');
+    const gender = document.getElementById('genderSelect');
+    const age = document.getElementById('age');
     const appointmentTime = document.getElementById('appointmentTime');
     const emailAddress = document.getElementById('emailAddress');
 
@@ -172,6 +174,8 @@ document.getElementById('appointmentForm').addEventListener('submit', function(e
         <h3>Appointment Booking Confirmation</h3>
         <p><strong>Doctor Name:</strong> ${doctorSelect.value}</p>
         <p><strong>Patient Name:</strong> ${patientName.value}</p>
+        <p><strong>Gender:</strong> ${gender.value}</p>
+        <p><strong>Age:</strong> ${age.value}</p>
         <p><strong>Appointment Time:</strong> ${appointmentTime.value}</p>
     `;
 
@@ -248,13 +252,18 @@ document.getElementById('appointmentForm').addEventListener('submit', function(e
     const patientName = document.getElementById('patientName').value.trim();
     const appointmentTime = document.getElementById('appointmentTime').value;
     const emailAddress = document.getElementById('emailAddress').value.trim();
+    const genderSelect = document.getElementById('genderSelect');
+    const age = document.getElementById('age');
+
 
     if (doctorSelect.value && patientName && appointmentTime && emailAddress) {
         const appointment = {
             doctor: doctorSelect.value,
             name: patientName,
             time: appointmentTime,
-            email: emailAddress
+            email: emailAddress,
+            gender: genderSelect.value,
+            age: age.value
         };
 
         // Add appointment to cookie
@@ -280,6 +289,8 @@ function listAppointments() {
         row.innerHTML = `
             <td>${appointment.doctor}</td>
             <td>${appointment.name}</td>
+            <td>${appointment.gender}</td>
+            <td>${appointment.age}</td>
             <td>${appointment.time}</td>
             <td>
                 <select class="status-dropdown" data-index="${index}" class="form-control">
@@ -317,6 +328,8 @@ function createAppointmentsSection() {
                     <tr>
                         <th>Doctor</th>
                         <th>Patient</th>
+                        <th>Gender</th>
+                        <th>Age</th>
                         <th>Date</th>
                         <th>Status</th>
                     </tr>
