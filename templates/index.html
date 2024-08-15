@@ -7,6 +7,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../assets/css/page.css">
     <link rel="stylesheet" href="../assets/vendors/themify-icons/css/themify-icons.css">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
     <style>
         /* Modal styles */
         .modal {
@@ -51,20 +52,22 @@
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
 
     <!-- Page Navbar -->
-    <nav class="custom-navbar" data-spy="affix" data-offset-top="20">
+    <nav class="custom-navbar" data-spy="affix" data-offset-top="30">
         <div class="container">
             <a class="logo" href="#">AI Healthcare Assistant</a>
             <ul class="nav">
                 <li class="item"><a class="link" href="#home">Home</a></li>
                 <li class="item"><a class="link" href="#about">About</a></li>
                 <li class="item"><a class="link" href="#service">Service</a></li>
-                <li class="item"><a class="link" href="#chat-container">Chatbot</a></li>
-                <li class="item"><a class="link" href="#testimonial">Testimonial</a></li>
+                <li class="item" id="admin-part-chat"><a class="link" href="#chat-container">Chatbot</a></li>
+                <li class="item"  id="admin-part-testimonial"><a class="link" href="#testimonial">Testimonial</a></li>
                 <li class="item"><a class="link" href="#contact">Contact</a></li>
+                <li class="item"><a class="link" href="#appointment">Make Appointment</a></li>
+                <li class="item" id="admin-part-appointment"><a class="link" href="#appointments">Appointment List</a></li>
             </ul>
             <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
                 <div class="hamburger-box">
-                  <div class="hamburger-inner"></div>
+                    <div class="hamburger-inner"></div>
                 </div>
             </a>
         </div>
@@ -146,74 +149,96 @@
     </section><!-- End of Service Section -->
 
     <section id="chat-container">
-		<h2>Talk to Your Healthcare Assistant</h2>
-		<div id="chat-history">
+        <h2>Talk to Your Healthcare Assistant</h2>
+        <div id="chat-history">
             <!-- Initial sample chat history will be populated dynamically -->
-		</div>
-		<div id="query-container">
-            <input type="text" id="user-input" placeholder="Type your message here...">
-            <button id="send-button">Send</button>
+        </div>
+        <div id="query-container">
+            <input type="text" id="user-input" class="form-control" placeholder="Type your message here...">
+            <button class="btn btn-outline-primary rounded" id="send-button">Send</button>
             <div class="loading-indicator" id="loading-indicator"></div>
-</div>
-    </section><!-- End of Chat Section -->
-    
-    <!-- Update the following script to integrate the chatbot functionality -->
-    <script>
-        document.getElementById('send-button').addEventListener('click', submitQuery);
-        document.getElementById('user-input').addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                submitQuery();
-            }
-        });
-    
-        function submitQuery() {
-            var query = document.getElementById("user-input").value.trim();
-            if (query !== "") {
-                var chatHistory = document.getElementById("chat-history");
-                chatHistory.innerHTML += "<div class='message user'>User: " + query + "</div>";
-                document.getElementById("user-input").value = "";
+        </div>
+    </section><
+<!-- Doctors Section -->
+<section class="section" id="doctors">
+    <div class="container text-center">
+        <p class="section-subtitle">Our Medical Experts</p>
+        <h6 class="section-title mb-6">Doctors</h6>
+        <div class="row" id="doctors-list">
+            <!-- List of doctors will be dynamically populated here -->
+        </div>
+    </div>
+</section><!-- End of Doctors Section -->
+
+<section class="section" id="appointment">
+    <div class="container text-center">
+        <p class="section-subtitle">Go a head and</p>
+        <h6 class="section-title mb-5">Make Appointment</h6>
+        <!-- appointment form -->
+        <form id="appointmentForm" class="needs-validation col-md-10 col-lg-8 m-auto" novalidate>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <select id="doctorSelect" class="form-control" required>
+                        <option value="" disabled selected>Select a Doctor</option>
+                        <!-- Doctor options will be dynamically populated here -->
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a doctor.
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="text" id="patientName" class="form-control" placeholder="Your Name" required>
+                    <div class="invalid-feedback">
+                        Please provide your name.
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <select id="genderSelect" class="form-control" required>
+                        <option value="" disabled selected>Select a gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                        <option value="Not prefer to say">Not prefer to say</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a gender.
+                    </div>
+                </div>
                 
-                var loadingIndicator = document.getElementById("loading-indicator");
-                loadingIndicator.style.display = "block";
-    
-                fetch("/process_query", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: "query=" + encodeURIComponent(query)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    loadingIndicator.style.display = "none";
-                    var botResponse = "";
-                    if (Array.isArray(data.response)) {
-                        botResponse = "<div class='message bot'>Bot: The list of patients in the database is:</div><ul>";
-                        data.response.forEach(patient => {
-                            botResponse += "<li>" + patient + "</li>";
-                        });
-                        botResponse += "</ul>";
-                    } else {
-                        botResponse = "<div class='message bot'>Bot: " + data.response + "</div>";
-                    }
-                    chatHistory.innerHTML += botResponse;
-                    chatHistory.scrollTop = chatHistory.scrollHeight; // Scroll to the bottom
-                })
-                .catch(error => {
-                    loadingIndicator.style.display = "none";
-                    console.error("Error:", error);
-                });
-            }
-        }
-    </script>
+                <div class="form-group col-md-6">
+                    <input type="number" id="age" class="form-control" placeholder="Your Age" required>
+                    <div class="invalid-feedback">
+                        Please provide your age.
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="email" id="emailAddress" class="form-control" placeholder="Your Email" required>
+                    <div class="invalid-feedback">
+                        Please provide your email address.
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <input type="datetime-local" id="appointmentTime" class="form-control" required>
+                    <div class="invalid-feedback">
+                        Please select an appointment time.
+                    </div>
+                </div>
+                <div class="form-group col-md-12 mt-3">
+                    <button class="btn btn-outline-primary rounded" type="submit">Book Appointment</button>
+                </div>
+            </div>
+        </form><!-- end of appointment form -->
+    </div><!-- end of container -->
+    <section class="section" id="appointments"></section>
+</section><!-- end of appointment section -->
 
     <!-- Testimonial Section -->
     <section class="section" id="testimonial">
         <div class="container text-center">
-            <p class="section-subtitle">What My Clients Say</p>
+            <p class="section-subtitle">What Our Clients Say</p>
             <h6 class="section-title mb-6">Testimonials</h6>
             <div class="row">
-                <div class="col-md-6 col-lg-5">
+                <div class="col-md-5 col-lg-4">
                     <div class="testimonial-card">
                         <div class="testimonial-card-img-holder">
                             <img src="assets/imgs/avatar2.jpg" class="testimonial-card-img" alt="Testimonial Image 1">
@@ -224,7 +249,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-5">
+                <div class="col-md-5 col-lg-4">
                     <div class="testimonial-card">
                         <div class="testimonial-card-img-holder">
                             <img src="assets/imgs/avatar3.jpg" class="testimonial-card-img" alt="Testimonial Image 2">
@@ -232,6 +257,17 @@
                         <div class="testimonial-card-body">
                             <p class="testimonial-card-subtitle">As a busy mom, Healthcare Assistant makes it easy to schedule doctor appointments for my family. The integration with our local clinic's system is seamless and efficient.</p>
                             <h6 class="testimonial-card-title">Sarah Johnson</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-card-img-holder">
+                            <img src="assets/imgs/avatar2.jpg" class="testimonial-card-img" alt="Landing page">
+                        </div>
+                        <div class="testimonial-card-body">
+                            <p class="testimonial-card-subtitle">Your Healthcare Assistant has been a lifesaver! The symptom checker is so accurate and the medication reminders have helped me stay on track with my treatment.</p>
+                            <h6 class="testimonial-card-title">Emily Reb</h6>
                         </div>
                     </div>
                 </div>
@@ -270,24 +306,33 @@
             <p class="footer-text">Copyright 2024 © <a href="https://www.devcrud.com">AI Healthcare Assistant</a> All rights reserved.</p>
         </footer>
     </div><!-- End of Page Footer -->
-
-    <!-- Login Modal -->
-    <div id="myModal" class="modal">
+<!-- Login Modal -->
+<div id="myModal" class="modal">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <form id="loginForm">
-                <input type="text" id="username" placeholder="Username" required>
-                <input type="password" id="password" placeholder="Password" required>
-                <button type="submit">Login</button>
-            </form>
+            <div class="modal-header">
+                <h5 class="modal-title">Login</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <input type="text" id="username" placeholder="Username" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" placeholder="Password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
         </div>
     </div>
-
-    <!-- Toast Notification -->
-    <div id="toast" class="toast"></div>
-
-    <!-- Core Scripts -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="../assets/js/page.js"></script>
-    <script src="../assets/js/navigation.js"></script>
+</div>
+<!-- Toast Notification -->
+<div id="toast" class="toast"></div>
+<!-- Core Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="../assets/js/page.js"></script>
+<script src="../assets/js/navigation.js"></script>
 </body>
 </html>
